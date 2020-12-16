@@ -1,0 +1,17 @@
+{
+  "name": "keruvi",
+  "version": "0.0.1",
+  "description": "Keras runtime visualisation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start-dev": "nodemon server.js"
+  },
+  "author": "C. Hecktor",
+  "dependencies": {
+    "express": ">=4.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "latest"
+  }
+}

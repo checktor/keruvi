@@ -1,0 +1,38 @@
+#relative-path-form {
+    margin-bottom: 20px;
+}
+
+/*
+Customizing of Chartist.js charts.
+See http://gionkunz.github.io/chartist-js/getting-started.html.
+*/
+
+/* Override line style. */
+.ct-line {
+    stroke-width: 2px;
+}
+
+/* Override line colour for first series, i.e. "loss" data. */
+.ct-series-a .ct-line {
+    stroke: red;
+}
+
+/* Override line colour for second series. */
+.ct-series-b .ct-line {
+    stroke: green;
+}
+
+/* Override point style. */
+.ct-point {
+    stroke-width: 2px;
+}
+
+/* Override point colour for first series, i.e. "loss" data. */
+.ct-series-a .ct-point {
+    stroke: red;
+}
+
+/* Override point colour for second series. */
+.ct-series-b .ct-point {
+    stroke: green;
+}

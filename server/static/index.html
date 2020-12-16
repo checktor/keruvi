@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>keruvi</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <h1>Keras runtime visualisation</h1>
+  <form id="relative-path-form">
+    <label for="relativePath">Relative path:</label>
+    <select name="relativePath" onchange="updateMetricsEventSource(event)">
+      <option value="/batch/boston">/batch/boston</option>
+      <option value="/epoch/boston" selected>/epoch/boston</option>
+      <option value="/train/boston">/train/boston</option>
+      <option value="/batch/gtsrb">/batch/gtsrb</option>
+      <option value="/epoch/gtsrb">/epoch/gtsrb</option>
+      <option value="/train/gtsrb">/train/gtsrb</option>
+      <option value="/batch/mnist">/batch/mnist</option>
+      <option value="/epoch/mnist">/epoch/mnist</option>
+      <option value="/train/mnist">/train/mnist</option>
+    </select>
+  </form>
+  <div id="chart"></div>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>
