@@ -80,7 +80,7 @@ def run(root_url):
         validation_split=0.2
     )
     train_data = train_data_generator.flow_from_directory(
-        os.path.join('gtsrb', 'data', 'test'),
+        os.path.join('gtsrb', 'data', 'train'),
         target_size=(32, 32),
         batch_size=128
     )
@@ -98,7 +98,7 @@ def run(root_url):
     )
 
     # Evaluate model.
-    test_imgs, test_labels = load_road_sign_data('./data/test')
+    test_imgs, test_labels = load_road_sign_data(os.path.join('gtsrb', 'data', 'test'))
     metrics = model.evaluate(test_imgs, test_labels, verbose=0)
     print(metrics)
 

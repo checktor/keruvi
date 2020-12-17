@@ -17,7 +17,7 @@ TensorFlow libraries for Python can be installed via pip. If necessary, install 
     # sudo apt install python3-pip
     pip3 install tensorflow
 
-Node project dependencies (e.g. the Express framework) can be installed via npm. If necessary, install Node.js and npm first. See https://nodejs.org/en/ and https://www.npmjs.com/ for details.
+Node project dependencies (e.g. Express framework) can be installed via npm. If necessary, install Node.js and npm first. See https://nodejs.org/en/ and https://www.npmjs.com/ for details.
 
     # install Node.js and npm
     cd server/
@@ -25,17 +25,19 @@ Node project dependencies (e.g. the Express framework) can be installed via npm.
 
 ## Usage
 
-During training of Keras models, metrics can be received via Keras callbacks. Use custom [KeruviRemoteMonitor](model/callback/remote_monitor.py) callback to send runtime metric data to a Node server which is able to visualize current training status. Start this server as follows:
+During training of Keras models, metrics can be received via Keras callbacks. Use custom [KeruviRemoteMonitor](model/callback/remote_monitor.py) callback to send runtime data to a Node server which is able to visualize current training status. Start this server as follows:
 
     cd server/
     npm run start
 
 By default, this server will be accessible through port 3000. Use environment variable `KERUVI_PORT` to change this behavior.
 
-Connect a specific Keras model to visualisation server using `KeruviRemoteMonitor`. In the following example, the callback instance is configured with server URL `http://localhost:3000` and ID `boston`:
+Connect specific Keras model to visualisation server using `KeruviRemoteMonitor`. In the following example, the callback instance is configured with server URL `http://localhost:3000` and ID `boston`:
 
     from tensorflow.keras.models import Sequential
     from tensorflow.keras.optimizers import RMSprop
+
+    from callback.remote_monitor import KeruviRemoteMonitor
 
     # Create model.
     model = Sequential()
@@ -47,8 +49,7 @@ Connect a specific Keras model to visualisation server using `KeruviRemoteMonito
     model.compile(optimizer=RMSprop(learning_rate=0.01), loss='mse')
 
     # Train model using custom Keras callback.
-    server_url = 'http://localhost:3000'
-    monitor = KeruviRemoteMonitor(root=server_url, model_id='boston')
+    monitor = KeruviRemoteMonitor(root='http://localhost:3000', model_id='boston')
     model.fit(
         your_training_data,
         your_training_labels,
@@ -59,7 +60,7 @@ Connect a specific Keras model to visualisation server using `KeruviRemoteMonito
         verbose=0
     )
 
-To get corresponding training metrics, e.g. concerning each epoch (`on_epoch_end` functionality), visit URL `http://localhost:3000/epoch/boston`. This endpoint is configured to be used as an EventSource.
+To get corresponding training metrics, e.g. for each epoch (`on_epoch_end` callback functionality), visit URL `http://localhost:3000/epoch/boston`. This endpoint is configured to be used as an EventSource:
 
     let oEventSource = new EventSource('epoch/boston');
     oEventSource.onmessage = function(oEvent) {
@@ -69,4 +70,4 @@ To get corresponding training metrics, e.g. concerning each epoch (`on_epoch_end
 
     }
 
-See https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback for more informationen concerning Keras callbacks. See also sample models using [MNIST](model/mnist/model.py), [Boston Housing](model/boston_housing/model.py) or [GTSRB](model/gtsrb/model.py) datasets.
+See https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback for more informationen concerning Keras callbacks. See also provided sample models using [MNIST](model/mnist/model.py), [Boston Housing](model/boston_housing/model.py) or [GTSRB](model/gtsrb/model.py) datasets.

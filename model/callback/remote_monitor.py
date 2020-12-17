@@ -51,14 +51,31 @@ class KeruviRemoteMonitor(Callback):
     def on_batch_end(self, batch, logs={}):
         if (self.use_batch_callback):
             payload = self._create_payload(logs)
-            requests.post(self.batch_url, json=payload)
+            try:
+                requests.post(self.batch_url, json=payload)
+            except requests.exceptions.RequestException as error:
+                # Skip "on_batch_end" request beacuse of network problems.
+                msg = 'Skipping "{}" request.\n{}'.format('on_batch_end', error)
+                print(msg)
+
     
     def on_epoch_end(self, epoch, logs={}):
         if (self.use_epoch_callback):
             payload = self._create_payload(logs)
-            requests.post(self.epoch_url, json=payload)
+            try:
+                requests.post(self.epoch_url, json=payload)
+            except requests.exceptions.RequestException as error:
+                # Skip "on_epoch_end" request because of network problems.
+                msg = 'Skipping "{}" request.\n{}'.format('on_epoch_end', error)
+                print(msg)
+
 
     def on_train_end(self, logs={}):
         if (self.use_train_callback):
             payload = self._create_payload(logs)
-            requests.post(self.train_url, json=payload)
+            try:
+                requests.post(self.train_url, json=payload)
+            except requests.exceptions.RequestException as error:
+                # Skip "on_train_end" request because of network problems.
+                msg = 'Skipping "{}" request.\n{}'.format('on_train_end', error)
+                print(msg)
