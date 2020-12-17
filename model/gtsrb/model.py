@@ -1,8 +1,8 @@
 import csv
-import Image
 import numpy
 import os
 from pandas import read_csv
+from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.utils import to_categorical
@@ -29,14 +29,14 @@ def load_road_sign_data(path):
         class_folder_name = format(class_index, '05d')
         class_csv_file_name = 'GT-{}.csv'.format(class_folder_name)
         class_folder_path = os.path.join(path, class_folder_name)
-        class_csv_file_path = os.path.join(class_folder_path, class_csv_file_name)
+        class_csv_file_path = os.path.join(class_folder_path, 'metadata', class_csv_file_name)
         with open(class_csv_file_path, 'r') as csv_fd:
             csv_reader = csv.reader(csv_fd, delimiter=';')
             next(csv_reader)
             for row in csv_reader:
                 img_name = row[0]
                 img_label = row[7]
-                img_path = os.path.join(class_folder_path, img_name)
+                img_path = os.path.join(class_folder_path, 'images', img_name)
                 img_content = Image.open(img_path)
                 img_matrix = preprocess_image(img_content)
                 images.append(img_matrix)
@@ -80,7 +80,7 @@ def run(root_url):
         validation_split=0.2
     )
     train_data = train_data_generator.flow_from_directory(
-        os.path.join('gtsrb', 'data', 'train'),
+        os.path.join('gtsrb', 'data', 'train', 'images'),
         target_size=(32, 32),
         batch_size=128
     )
