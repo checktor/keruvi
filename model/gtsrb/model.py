@@ -1,8 +1,8 @@
 import csv
+import Image
 import numpy
 import os
 from pandas import read_csv
-from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.utils import to_categorical
