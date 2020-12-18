@@ -28,16 +28,15 @@ def load_road_sign_data(path):
     for class_index in range(NUM_CLASSES):
         class_folder_name = format(class_index, '05d')
         class_csv_file_name = 'GT-{}.csv'.format(class_folder_name)
-        class_folder_path = os.path.join(path, class_folder_name)
-        class_csv_file_path = os.path.join(class_folder_path, 'metadata', class_csv_file_name)
+        class_csv_file_path = os.path.join(path, 'metadata', class_csv_file_name)
         with open(class_csv_file_path, 'r') as csv_fd:
             csv_reader = csv.reader(csv_fd, delimiter=';')
             next(csv_reader)
             for row in csv_reader:
                 img_name = row[0]
                 img_label = row[7]
-                img_path = os.path.join(class_folder_path, 'images', img_name)
-                img_content = Image.open(img_path)
+                img_file_path = os.path.join(path, 'images', class_folder_name, img_name)
+                img_content = Image.open(img_file_path)
                 img_matrix = preprocess_image(img_content)
                 images.append(img_matrix)
                 labels.append(to_categorical(img_label, num_classes=NUM_CLASSES))
