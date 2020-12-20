@@ -9,6 +9,13 @@ Runtime visualisation of TensorFlow Keras model training with Node.js.
 * Node.js (https://nodejs.org/en/)
     * JavaScript runtime
 
+The example models in [model](model/) directory may require further packages, i.e.:
+
+* NumPy (https://numpy.org/)
+    * numerical computations
+* Pillow (https://python-pillow.org/)
+    * image processing
+
 ## Install
 
 TensorFlow libraries for Python can be installed via pip. If necessary, install python3 and python3-pip packages first.

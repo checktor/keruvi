@@ -1,7 +1,6 @@
 import csv
 import numpy
 import os
-from pandas import read_csv
 from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -13,16 +12,11 @@ IMG_WIDTH = 32
 IMG_HEIGHT = 32
 NUM_CLASSES = 43
 
-SIGN_NAMES = read_csv(os.path.join('gtsrb', 'data', 'traffic_sign_names.csv'), delimiter=',')
-
-def get_road_sign_name(index):
-    return SIGN_NAMES.values[index][1]
-
 def preprocess_image(image):
     img = image.resize((IMG_WIDTH, IMG_HEIGHT))
     return numpy.asarray(img)
 
-def load_road_sign_data(path):
+def load_gtsrb_data(path):
     images = []
     labels = []
     for class_index in range(NUM_CLASSES):
@@ -65,8 +59,9 @@ def load_model():
     return model
 
 def run(root_url):
-    # Prepare data generator serving training
-    # data directly from file system directory.
+    # Create data generator serving training
+    # data directly from file system directory
+    # transforming it randomly on the fly.
     train_data_generator = ImageDataGenerator(
         rescale=1./255,
         rotation_range=20,
@@ -97,7 +92,7 @@ def run(root_url):
     )
 
     # Evaluate model.
-    test_imgs, test_labels = load_road_sign_data(os.path.join('gtsrb', 'data', 'test'))
+    test_imgs, test_labels = load_gtsrb_data(os.path.join('gtsrb', 'data', 'test'))
     metrics = model.evaluate(test_imgs, test_labels, verbose=0)
     print(metrics)
 
