@@ -44,8 +44,8 @@ def load_model():
     model.add(tf.keras.layers.Conv2D(64, (5,5), strides=(2,2), activation='relu'))
     model.add(tf.keras.layers.Conv2D(128, (5,5), strides=(2,2), activation='relu'))
     model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2), strides=(2,2)))
-    model.add(tf.keras.layers.Flatten())
     model.add(tf.keras.layers.Dropout(0.5))
+    model.add(tf.keras.layers.Flatten())
     model.add(tf.keras.layers.Dense(512, activation='relu'))
     model.add(tf.keras.layers.Dense(NUM_CLASSES, activation='softmax'))
 
