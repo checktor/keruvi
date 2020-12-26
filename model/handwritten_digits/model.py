@@ -17,6 +17,7 @@ def load_mnist_data():
 
     # Training images (60,000 images, grayscale, 28 x 28).
     train_imgs = train_imgs.reshape((-1, 28, 28, 1))
+    # Normalize pixels.
     train_imgs = train_imgs.astype(float)
     train_imgs /= 255
     # Training labels (one-hot encoding, 10 categories).
@@ -24,6 +25,7 @@ def load_mnist_data():
 
     # Testing images (10,000 images, grayscale, 28 x 28)
     test_imgs = test_imgs.reshape((-1, 28, 28, 1))
+    # Normalize pixels.
     test_imgs = test_imgs.astype(float)
     test_imgs /= 255
     # Testing labels (one-hot encoding, 10 categories).
@@ -48,6 +50,9 @@ def _load_chars74k_data(path):
                 img_raw = img_raw.resize((28, 28))
                 # Convert image to array.
                 img = tf.keras.preprocessing.image.img_to_array(img_raw)
+                # Normalize pixels.
+                img.astype(float)
+                img /= 255
                 imgs.append(img)
                 # Extract corresponding label from folder name.
                 label_raw = int(img_directory.split('_')[1])
@@ -70,7 +75,7 @@ def run(root_url):
 
     # Get Chars74K data.
     (chars74k_train_imgs, chars74k_train_labels), (chars74k_test_imgs, chars74k_test_labels) = load_chars74k_data()
-    
+
     # Combine both datasets to a single one.
     train_imgs = numpy.concatenate((mnist_train_imgs, chars74k_train_imgs), axis=0)
     train_labels = numpy.concatenate((mnist_train_labels, chars74k_train_labels), axis=0)
@@ -109,8 +114,10 @@ def run(root_url):
 
     # Dense layer 1.
     model.add(Dense(128, activation='relu'))
+
     # Dense layer 2.
     model.add(Dense(64, activation='relu'))
+
     # Dense layer 3.
     model.add(Dense(10, activation='softmax'))
 
