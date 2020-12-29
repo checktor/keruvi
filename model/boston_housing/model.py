@@ -6,7 +6,7 @@ from tensorflow.keras.models import Sequential
 from callback.remote_monitor import KeruviRemoteMonitor
 
 def run(root_url):
-    # Get Boston Housing data.
+    # Get Boston Housing dataset.
     (train_data, train_labels), (test_data, test_labels) = boston_housing.load_data()
 
     # Define model (neural network).
