@@ -77,4 +77,4 @@ To get corresponding training metrics, e.g. for each epoch (`on_epoch_end` callb
 
     }
 
-See https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback for more informationen concerning Keras callbacks. See also provided sample models using [MNIST](model/mnist/model.py), [Boston Housing](model/boston_housing/model.py) or [GTSRB](model/gtsrb/model.py) datasets.
+See https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback for more informationen concerning Keras callbacks. See also provided sample models in [model](model/) folder.

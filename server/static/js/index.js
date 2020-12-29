@@ -52,9 +52,17 @@ function handleMetricsEvent(oEvent) {
   oLineChart.update(oLineChartData);
 }
 
-let oEventSource = new EventSource('epoch/boston');
-function updateMetricsEventSource(oEvent) {
-  const sEventSourcePath = oEvent.target.value;
+let sMode = 'epoch';
+let sDataset = 'boston';
+
+function _getEventSourcePath() {
+  return `${sMode}/${sDataset}`;
+}
+
+let oEventSource;
+
+function _updateEventSource() {
+  const sEventSourcePath = _getEventSourcePath();
   if (oEventSource) {
     oEventSource.close();
   }
@@ -62,3 +70,14 @@ function updateMetricsEventSource(oEvent) {
   oEventSource.onmessage = handleMetricsEvent;
 }
 
+function updateMode(oEvent) {
+  sMode = oEvent.target.value;
+  _updateEventSource();
+}
+
+function updateDataset(oEvent) {
+  sDataset = oEvent.target.value;
+  _updateEventSource();
+}
+
+_updateEventSource();

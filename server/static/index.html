@@ -12,17 +12,18 @@
 <body>
   <h1>Keras runtime visualisation</h1>
   <form id="relative-path-form">
-    <label for="relativePath">Relative path:</label>
-    <select name="relativePath" onchange="updateMetricsEventSource(event)">
-      <option value="/batch/boston">/batch/boston</option>
-      <option value="/epoch/boston" selected>/epoch/boston</option>
-      <option value="/train/boston">/train/boston</option>
-      <option value="/batch/gtsrb">/batch/gtsrb</option>
-      <option value="/epoch/gtsrb">/epoch/gtsrb</option>
-      <option value="/train/gtsrb">/train/gtsrb</option>
-      <option value="/batch/digits">/batch/digits</option>
-      <option value="/epoch/digits">/epoch/digits</option>
-      <option value="/train/digits">/train/digits</option>
+    <label for="modePath">Mode:</label>
+    <select name="modePath" onchange="updateMode(event)">
+      <option value="batch">batch</option>
+      <option value="epoch" selected>epoch</option>
+      <option value="train">train</option>
+    </select>
+    <label for="datasetPath">Dataset:</label>
+    <select name="datasetPath" onchange="updateDataset(event)">
+      <option value="boston" selected>boston</option>
+      <option value="gtsrb">gtsrb</option>
+      <option value="digits">digits</option>
+      <option value="imdb">imdb</option>
     </select>
   </form>
   <div id="chart"></div>
