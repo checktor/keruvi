@@ -82,4 +82,4 @@ See https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback for m
 * [Boston Housing](model/boston_housing) (prediction of house prices)
 * [GTSRG](model/gtsrb) (classification of traffic sign images)
 * [MNIST and Chars74K](model/handwritten_digits) (classification of handwritten digits)
-* [IMDb](model/imdb) (model/imdb) (sentiment analysis)
+* [IMDb](model/imdb) (sentiment analysis)
