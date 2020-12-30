@@ -12,6 +12,21 @@ IMG_WIDTH = 32
 IMG_HEIGHT = 32
 NUM_CLASSES = 43
 
+# Read CSV file containing a mapping of traffic
+# sign ID to its name and convert it to a dictionary.
+ID_TO_NAME_INDEX = {}
+with open(os.path.join('gtsrb', 'data', 'traffic_sign_names.csv')) as csv_fd:
+    csv_reader = csv.reader(csv_fd, delimiter=',')
+    # Skip title row.
+    next(csv_reader)
+    for row in csv_reader:
+        class_id = int(row[0])
+        class_name = row[1]
+        ID_TO_NAME_INDEX[class_id] = class_name
+
+def get_road_sign_name(road_sign_id):
+    return ID_TO_NAME_INDEX[road_sign_id]
+
 def preprocess_image(image):
     img = image.resize((IMG_WIDTH, IMG_HEIGHT))
     return numpy.asarray(img)
@@ -19,12 +34,15 @@ def preprocess_image(image):
 def load_gtsrb_data(path):
     images = []
     labels = []
-    for class_index in range(NUM_CLASSES):
-        class_folder_name = format(class_index, '05d')
+    for class_id in range(NUM_CLASSES):
+        class_folder_name = format(class_id, '05d')
         class_csv_file_name = 'GT-{}.csv'.format(class_folder_name)
         class_csv_file_path = os.path.join(path, 'metadata', class_csv_file_name)
         with open(class_csv_file_path, 'r') as csv_fd:
+            # Read CSV file with metadata for
+            # each dataset entry of current class.
             csv_reader = csv.reader(csv_fd, delimiter=';')
+            # Skip title row.
             next(csv_reader)
             for row in csv_reader:
                 img_name = row[0]

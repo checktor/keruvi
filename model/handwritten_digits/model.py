@@ -12,7 +12,7 @@ CHARS74K_TRAIN_DIRECTORY = os.path.join('handwritten_digits', 'data', 'train')
 CHARS74K_TEST_DIRECTORY = os.path.join('handwritten_digits', 'data', 'test')
 
 def load_mnist_data():
-    # Get and prepare MNIST dataset.
+    # Load and prepare MNIST dataset.
     (train_imgs, train_labels), (test_imgs, test_labels) = tf.keras.datasets.mnist.load_data()
 
     # Training images (60,000 images, grayscale, 28 x 28).
@@ -62,9 +62,9 @@ def _load_chars74k_data(path):
     return numpy.array(imgs), numpy.array(labels)
     
 def load_chars74k_data():
-    # Load training data.
+    # Load Chars74K training dataset.
     train_imgs, train_labels = _load_chars74k_data(CHARS74K_TRAIN_DIRECTORY)
-    # Load testing data.
+    # Load Chars74K testing dataset.
     test_imgs, test_labels = _load_chars74k_data(CHARS74K_TEST_DIRECTORY)
 
     return (train_imgs, train_labels), (test_imgs, test_labels)

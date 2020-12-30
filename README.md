@@ -77,4 +77,9 @@ To get corresponding training metrics, e.g. for each epoch (`on_epoch_end` callb
 
     }
 
-See https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback for more informationen concerning Keras callbacks. See also provided sample models in [model](model/) folder.
+See https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback for more informationen concerning Keras callbacks. Sample models using a custom Keras callback can be found in [model](model/) folder. Run corresponding `_example.py` scripts for testing, e.g. [boston_housing_example.py](model/boston_housing_example.py) to train a model using the Boston Housing dataset. Currently, trainable example models for the following datasets are provided:
+
+* [Boston Housing](model/boston_housing) (prediction of house prices)
+* [GTSRG](model/gtsrb) (classification of traffic sign images)
+* [MNIST and Chars74K](model/handwritten_digits) (classification of handwritten digits)
+* [IMDb](model/imdb) (model/imdb) (sentiment analysis)

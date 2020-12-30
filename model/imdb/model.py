@@ -1,3 +1,5 @@
+import numpy
+import string
 from tensorflow.keras.datasets import imdb
 from tensorflow.keras.layers import Embedding, GlobalAveragePooling1D, Dense, Dropout
 from tensorflow.keras.models import Sequential
@@ -23,11 +25,28 @@ WORD_TO_ID_INDEX['<UNKNOWN>'] = UNKNOWN_WORD_ID
 ID_TO_WORD_INDEX = { value: key for key, value in WORD_TO_ID_INDEX.items() }
 
 def convertIdListToString(id_list):
+    # Replace each word ID in provided
+    # list with its string representation.
     word_list = [ID_TO_WORD_INDEX[id] for id in id_list]
-    return ' '.join(word_list)
+    # Concatenate all words in converted list to
+    # a single string separated by white spaces.
+    word_string = ' '.join(word_list)
+    return word_string
 
-def convertStringToIdList():
-    pass
+def convertStringToIdList(sentence):
+    # Convert provided string to lowercase.
+    sentence = sentence.lower()
+    # Remove all sorts of punctuation.
+    sentence = sentence.translate(str.maketrans('', '', string.punctuation))
+    # Convert retrieved string to a list of
+    # words using a white space as delimiter.
+    # Then replace each word with its ID.
+    id_list = []
+    for word in sentence.split(' '):
+        id_list.append(WORD_TO_ID_INDEX[word])
+    # Pad word ID list to uniform length.
+    id_list = sequence.pad_sequences([id_list], maxlen=PAD_MAX_LENGTH, value=PAD_WORD_ID)
+    return numpy.array(id_list)
 
 def run(root_url):
     # Get IMDb dataset.
@@ -38,7 +57,7 @@ def run(root_url):
         index_from=INDEX_FROM
     )
 
-    # Pad sequence of all dataset entries to the same length.
+    # Pad word ID lists of dataset to uniform length.
     train_data = sequence.pad_sequences(train_data, maxlen=PAD_MAX_LENGTH, value=PAD_WORD_ID)
     test_data = sequence.pad_sequences(test_data, maxlen=PAD_MAX_LENGTH, value=PAD_WORD_ID)
 
