@@ -1,0 +1,7 @@
+baseURL = 'https://checktor.github.io/blog/'
+languageCode = 'de-de'
+title = 'keruvi'
+theme = 'beautifulhugo'
+
+[Params]
+subtitle = 'Keras runtime visualisation'
