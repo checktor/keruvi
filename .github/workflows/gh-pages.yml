@@ -14,7 +14,7 @@ jobs:
       with:
         submodules: true
 
-    - name: Setup
+    - name: Setup hugo
       uses: peaceiris/actions-hugo@v2
       
     - name: Build
