@@ -1,5 +1,5 @@
-baseURL = 'https://checktor.github.io/blog/'
-languageCode = 'de-de'
+baseURL = 'https://checktor.github.io/keruvi/'
+languageCode = 'en-us'
 title = 'keruvi'
 theme = 'beautifulhugo'
 
