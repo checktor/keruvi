@@ -37,7 +37,7 @@ During training of Keras models, metrics can be received via Keras callbacks. Us
     cd server/
     npm run start
 
-By default, this server will be accessible through port 3000. Use environment variable `KERUVI_PORT` to change this behavior.
+By default, the server will be accessible via port 3000. Use environment variable `KERUVI_PORT` to change this behavior.
 
 Connect specific Keras model to visualisation server using `KeruviRemoteMonitor`. In the following example, the callback instance is configured with server URL `http://localhost:3000` and ID `boston`:
 
